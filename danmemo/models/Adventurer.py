@@ -1,19 +1,14 @@
 from . import db
+from mongoengine import EmbeddedDocumentField, Document
+from .Info import Info
 
-class Adventurer(db.Document):
-    name = db.StringField(required=True)
+class Adventurer(Document):
+    info = EmbeddedDocumentField(Info, required=True)
+
+    # @classmethod
+    # def new(cls, info):
+        # return Adventurer(info)
     
-    @classmethod
-    def new(cls, name):
-        return Adventurer(name=name)
-    
-        
-    def delete(self):
-        try:
-            self.delete()
-            return True
-        except:
-            return False
     
     def __str__(self):
         return self.name
